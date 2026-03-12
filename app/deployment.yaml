@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: random-animal
+  labels:
+    app: random-animal
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: random-animal
+  template:
+    metadata:
+      labels:
+        app: random-animal
+    spec:
+      containers:
+        - name: web
+          image: nginxinc/nginx-unprivileged:alpine
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: html-volume
+              mountPath: /usr/share/nginx/html/index.html
+              subPath: index.html
+      volumes:
+        - name: html-volume
+          configMap:
+            name: random-animal-html

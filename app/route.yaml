@@ -1,0 +1,14 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: random-animal
+  labels:
+    app: random-animal
+spec:
+  port:
+    targetPort: web
+  to:
+    kind: Service
+    name: random-animal
+    weight: 100
+  wildcardPolicy: None

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: random-animal
+  labels:
+    app: random-animal
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+      name: web
+  selector:
+    app: random-animal

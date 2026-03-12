@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: random-animal-html
+  labels:
+    app: random-animal
+data:
+  index.html: |
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Random Animal Generator</title>
+        <style>
+            body { display: flex; justify-content: center; align-items: center; height: 100vh; font-family: -apple-system, 
+    BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #1e1e2e; margin: 0; color: #cdd6f4; }
+            #app-container { text-align: center; padding: 3rem; background: #313244; border-radius: 12px; 
+    box-shadow: 0 10px 15px rgba(0,0,0,0.3); }
+            h1 { font-size: 4rem; color: #89b4fa; margin: 0 0 1rem 0; text-transform: capitalize; }
+            p { color: #a6adc8; font-size: 1.1rem; margin: 0; }
+            .timer-bar { height: 4px; background: #89b4fa; margin-top: 2rem; border-radius: 2px; animation: 
+    load 7s linear infinite; }
+            @keyframes load { 0% { width: 0%; } 100% { width: 100%; } }
+        </style>
+    </head>
+    <body>
+        <div id="app-container">
+            <h1 id="animal-name">Loading...</h1>
+            <p>Generating a new animal every 7 seconds</p>
+            <div class="timer-bar"></div>
+        </div>
+        <script>
+            const animals = ["Aardvark", "Albatross", "Alligator", "Alpaca", "Armadillo", "Badger", "Bat", "Bear", "Beaver", 
+    "Buffalo", "Camel", "Capybara", "Caribou", "Cheetah", "Chimpanzee", "Cobra", "Coyote", "Crocodile", "Deer", "Dolphin", 
+    "Eagle", "Elephant", "Elk", "Emu", "Falcon", "Ferret", "Flamingo", "Fox", "Frog", "Gazelle", "Giraffe", "Goat", "Gorilla", 
+    "Hippopotamus", "Hyena", "Iguana", "Jaguar", "Kangaroo", "Koala", "Lemur", "Leopard", "Lion", "Llama", "Lynx", "Meerkat", 
+    "Moose", "Narwhal", "Ocelot", "Octopus", "Ostrich", "Otter", "Owl", "Panda", "Panther", "Parrot", "Pelican", "Penguin", 
+    "Platypus", "Porcupine", "Pug", "Rabbit", "Raccoon", "Rhinoceros", "Salamander", "Seal", "Shark", "Sloth", "Snake", 
+    "Squirrel", "Tiger", "Toucan", "Turtle", "Walrus", "Whale", "Wolf", "Wombat", "Zebra"];
+    
+            function updateAnimal() {
+                const randomAnimal = animals[Math.floor(Math.random() * animals.length)];
+                document.getElementById('animal-name').textContent = randomAnimal;
+            }
+
+            updateAnimal(); // Initial load
+            setInterval(updateAnimal, 7000); // Update every 7000ms
+        </script>
+    </body>
+    </html>
